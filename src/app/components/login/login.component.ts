@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '@app/services/auth.service';
 
 @Component({
@@ -10,10 +11,14 @@ import { AuthService } from '@app/services/auth.service';
 export class LoginComponent {
   loginForm: FormGroup;
   submitted: boolean = false;
+  loginMethods: Array<string> = [];
+  redirectUrl: string;
+  appName: string;
 
   constructor(
     private formBuilder: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private route: ActivatedRoute
   ) {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
@@ -23,6 +28,19 @@ export class LoginComponent {
 
   get formControls() {
     return this.loginForm.controls;
+  }
+
+  ngOnInit() {
+    this.route.queryParams.subscribe((params) => {
+      debugger;d
+        this.redirectUrl = params['redirectUrl'];
+        this.loginMethods = params['loginMethods'];
+        this.appName = params['appName'];
+        // const deserializedObject = JSON.parse(decodeURIComponent(params));
+        // Now you have your object in deserializedObject
+        // console.log(deserializedObject);
+      }
+    });
   }
 
   loginUser() {
@@ -38,9 +56,7 @@ export class LoginComponent {
       (response) => {
         // Handle successful login here (e.g., store authentication token, redirect, etc.)
         console.log('Login successful:', response);
-        window.location.replace(
-          `https://is-auth-next.netlify.app/?token=${response.token}`
-        );
+        window.location.replace(`${this.redirectUrl}/?token=${response.token}`);
       },
       (error) => {
         // Handle login error here (e.g., show error message)

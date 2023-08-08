@@ -1,3 +1,3 @@
 export const environment = {
-  apiUrl: '',
+  apiUrl: 'https://fastidious-cupcake-9b7917.netlify.app/my_functions',
 };

@@ -32,7 +32,7 @@ export class LoginComponent {
 
   ngOnInit() {
     this.route.queryParams.subscribe((params) => {
-      debugger;d
+      if (params) {
         this.redirectUrl = params['redirectUrl'];
         this.loginMethods = params['loginMethods'];
         this.appName = params['appName'];

@@ -39,7 +39,7 @@ export class LoginComponent {
         // Handle successful login here (e.g., store authentication token, redirect, etc.)
         console.log('Login successful:', response);
         window.location.replace(
-          `https://candid-crostata-8f1aac.netlify.app/?token=${response.token}`
+          `https://is-auth-next.netlify.app/?token=${response.token}`
         );
       },
       (error) => {

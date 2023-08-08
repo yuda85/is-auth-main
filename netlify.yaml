@@ -1,0 +1,13 @@
+[build]
+  publish = "dist/your-angular-app-folder" # Update this to the path of your Angular app's build output folder
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[[plugins]]
+  package = "@netlify/plugin-functions-install-core"
+
+[functions]
+  directory = "my_functions" # Upd

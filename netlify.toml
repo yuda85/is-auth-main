@@ -2,14 +2,16 @@
   publish = "dist/iscar-auth" # Update this to the path of your Angular app's build output folder
 
 [[redirects]]
+  from = "/my_functions/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+
+[[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
 
-[[redirects]]
-  from = "/my-functions/*"
-  to = "/.netlify/functions/:splat"
-  status = 200
+
 
 [[plugins]]
   package = "@netlify/plugin-functions-install-core"
